@@ -6,6 +6,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.42.0] - 2022-10-16
+### Added
+- Validating if user activation link didn't expired by [@kryst3q](https://github.com/kryst3q)
+
+## [0.41.0] - 2022-10-16
+### Added
+- Endpoint to activate freshly registered user account by [@kryst3q](https://github.com/kryst3q)
+
+## [0.40.0] - 2022-10-16
+### Added
+- User registration functionality by [@kryst3q](https://github.com/kryst3q)
+- Symfony debug tools for improving development performance by [@kryst3q](https://github.com/kryst3q)
+
+## [0.39.0] - 2022-10-06
+### Added
+- Library to handle CORS requests by [@kryst3q](https://github.com/kryst3q)
+### Updated
+- Testing framework (codeception) to the newest stable version (5.0.3) by [@kryst3q](https://github.com/kryst3q)
+
 ## [0.38.0] - 2022-10-06
 ### Added
 - Info about logged in user in the response of POST `/api/login_check` endpoint by [@kryst3q](https://github.com/kryst3q)
