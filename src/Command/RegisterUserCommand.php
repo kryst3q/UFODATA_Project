@@ -4,14 +4,13 @@ namespace App\Command;
 
 use App\Contract\AnonymousUserInterface;
 use App\Contract\RegisterUserCommandInterface;
-use App\Contract\UserInterface;
+use App\Contract\SynchronousCommandInterface;
 use App\Entity\User;
 use App\Validator\ResourceNotExists;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class RegisterUserCommand implements RegisterUserCommandInterface
+class RegisterUserCommand implements RegisterUserCommandInterface, SynchronousCommandInterface
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]
@@ -35,7 +34,6 @@ class RegisterUserCommand implements RegisterUserCommandInterface
     public string $password;
 
     //todo: get rid of anonymous users in anonymous requests?
-    #[Ignore]
     public AnonymousUserInterface $provider;
 
     public function getEmail(): string
@@ -58,7 +56,7 @@ class RegisterUserCommand implements RegisterUserCommandInterface
         return $this->uuid;
     }
 
-    public function getProvider(): UserInterface
+    public function getProvider(): AnonymousUserInterface
     {
         return $this->provider;
     }

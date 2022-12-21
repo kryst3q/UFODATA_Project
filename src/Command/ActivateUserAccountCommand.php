@@ -4,15 +4,14 @@ namespace App\Command;
 
 use App\Contract\ActivateUserAccountCommandInterface;
 use App\Contract\AnonymousUserInterface;
-use App\Contract\UserInterface;
+use App\Contract\SynchronousCommandInterface;
 use App\Validator\UserActivationLinkExists;
 use App\Validator\UserActivationLinkNotExpired;
 use App\Validator\UserActivationLinkNotUsed;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class ActivateUserAccountCommand implements ActivateUserAccountCommandInterface
+class ActivateUserAccountCommand implements ActivateUserAccountCommandInterface, SynchronousCommandInterface
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]
@@ -21,7 +20,6 @@ class ActivateUserAccountCommand implements ActivateUserAccountCommandInterface
     #[UserActivationLinkNotExpired]
     public UuidInterface $uuid;
 
-    #[Ignore]
     public AnonymousUserInterface $provider;
 
     public function getUuid(): UuidInterface
@@ -29,7 +27,7 @@ class ActivateUserAccountCommand implements ActivateUserAccountCommandInterface
         return $this->uuid;
     }
 
-    public function getProvider(): UserInterface
+    public function getProvider(): AnonymousUserInterface
     {
         return $this->provider;
     }

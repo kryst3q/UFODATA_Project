@@ -19,14 +19,15 @@ RUN apt-get update \
       libcurl4-openssl-dev \
       pkg-config \
       libssl-dev\
+      librabbitmq-dev \
     && docker-php-ext-install pdo_pgsql \
     && docker-php-ext-enable pdo_pgsql \
-    && pecl install mongodb \
-    && docker-php-ext-enable mongodb \
     && docker-php-ext-install zip \
     && docker-php-ext-enable zip \
     && docker-php-ext-install intl \
-    && docker-php-ext-enable intl
+    && docker-php-ext-enable intl \
+    && pecl install amqp \
+    && docker-php-ext-enable amqp
 
 RUN echo "upload_max_filesize=32M" >> "$PHP_INI_DIR/php.ini"
 COPY ./docker/app/apache.conf /etc/apache2/sites-enabled/000-default.conf
@@ -34,6 +35,9 @@ COPY ./docker/app/entrypoint.sh /entrypoint.sh
 COPY . /var/www/html/
 
 WORKDIR /var/www/html/
+
+RUN composer install --no-interaction --prefer-dist --no-scripts \
+    ; composer dump-autoload --optimize --no-interaction
 
 CMD ["apache2-foreground"]
 

@@ -4,6 +4,7 @@ namespace App\Command;
 
 use App\Contract\AddMeasurementCommandInterface;
 use App\Contract\FileUploadInterface;
+use App\Contract\SynchronousCommandInterface;
 use App\Contract\UserInterface;
 use App\Entity\Measurement;
 use App\Entity\Observation;
@@ -12,10 +13,9 @@ use App\Validator\ResourceExists;
 use App\Validator\ResourceNotExists;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class AddMeasurementCommand implements AddMeasurementCommandInterface, FileUploadInterface
+class AddMeasurementCommand implements AddMeasurementCommandInterface, FileUploadInterface, SynchronousCommandInterface
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]
@@ -43,7 +43,6 @@ class AddMeasurementCommand implements AddMeasurementCommandInterface, FileUploa
     #[Assert\Length(max: Measurement::NAME_MAX_LENGTH)]
     public ?string $name = null;
 
-    #[Ignore]
     public UserInterface $provider;
 
     /**

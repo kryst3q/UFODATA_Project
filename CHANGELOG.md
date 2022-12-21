@@ -6,6 +6,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.47.0] - 2022-11-18
+### Changed
+- Sending account activation email asynchronously by [@kryst3q](https://github.com/kryst3q)
+
+## [0.46.0] - 2022-11-11
+### Changed
+- Way of handling incoming commands by using Symfony Messenger by [@kryst3q](https://github.com/kryst3q)
+
+## [0.45.0] - 2022-10-23
+### Added
+- Returning "application/json" content type header on error by [@kryst3q](https://github.com/kryst3q)
+
+## [0.44.3] - 2022-10-23
+### Fixed
+- Activating registered account through an endpoint provided in an email by [@kryst3q](https://github.com/kryst3q)
+
+## [0.44.2] - 2022-10-21
+### Fixed
+- Failing tests by [@kryst3q](https://github.com/kryst3q)
+- Registration process by [@kryst3q](https://github.com/kryst3q)
+
+### Changed
+- Way of installing (in Docker image build phase) and storing (in container only) composer dependencies in dev env by [@kryst3q](https://github.com/kryst3q)
+
 ## [0.43.0] - 2022-10-19
 ### Added
 - "ext-intl" as the requirement in composer.json file by [@kryst3q](https://github.com/kryst3q)

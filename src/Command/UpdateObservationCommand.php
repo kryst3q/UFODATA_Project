@@ -2,16 +2,16 @@
 
 namespace App\Command;
 
+use App\Contract\SynchronousCommandInterface;
 use App\Contract\UpdateObservationCommandInterface;
 use App\Contract\UserInterface;
 use App\Entity\Observation;
 use App\Validator\ActionOnResourceIsGranted;
 use App\Validator\ResourceExists;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class UpdateObservationCommand implements UpdateObservationCommandInterface
+class UpdateObservationCommand implements UpdateObservationCommandInterface, SynchronousCommandInterface
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]
@@ -23,7 +23,6 @@ class UpdateObservationCommand implements UpdateObservationCommandInterface
     #[Assert\Type('string')]
     public string $name;
 
-    #[Ignore]
     public UserInterface $provider;
 
     public function getUuid(): UuidInterface

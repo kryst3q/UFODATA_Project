@@ -3,15 +3,15 @@
 namespace App\Command;
 
 use App\Contract\DeleteUserCommandInterface;
+use App\Contract\SynchronousCommandInterface;
 use App\Contract\UserInterface;
 use App\Entity\User;
 use App\Validator\ActionOnResourceIsGranted;
 use App\Validator\ResourceExists;
 use Ramsey\Uuid\UuidInterface;
-use Symfony\Component\Serializer\Annotation\Ignore;
 use Symfony\Component\Validator\Constraints as Assert;
 
-class DeleteUserCommand implements DeleteUserCommandInterface
+class DeleteUserCommand implements DeleteUserCommandInterface, SynchronousCommandInterface
 {
     #[Assert\NotBlank]
     #[Assert\Uuid]
@@ -19,7 +19,6 @@ class DeleteUserCommand implements DeleteUserCommandInterface
     #[ActionOnResourceIsGranted(entityClassName: User::class)]
     public UuidInterface $uuid;
 
-    #[Ignore]
     public UserInterface $provider;
 
     public function getUuid(): UuidInterface
